@@ -11,6 +11,16 @@ export default class MaskNumberView {
     return false;
   }
 
+  setOnlyNumbersValidator(webElement) {
+    webElement.addEventListener("keypress", keyboardEvent => {
+      console.log(keyboardEvent.key);
+
+      if (!this.isNumber(keyboardEvent.key)) {
+        keyboardEvent.preventDefault();
+      }
+    });
+  }
+
   setMarginRightForSpecialChar(webElement, mask, elementPos) {
     if (elementPos !== mask.length - 1) {
       if (
@@ -45,6 +55,8 @@ export default class MaskNumberView {
       webElement.className = "number-block__input";
       webElement.maxLength = 1;
       this.setMarginRightForSpecialChar(webElement, mask, elementPos);
+
+      this.setOnlyNumbersValidator(webElement);
     } else {
       webElement = document.createElement("div");
 
