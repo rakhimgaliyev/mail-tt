@@ -1,8 +1,7 @@
 "use strict";
 
 export default class MaskNumberView {
-  // TODO: REPLACE INNER HTML,
-  //  create loop with adding element to number block
+  inputId = "number-block__number__input";
 
   isNumber(char) {
     if (char >= 0 && char <= 9) {
@@ -12,11 +11,11 @@ export default class MaskNumberView {
   }
 
   setOnlyNumbersValidator(webElement) {
-    webElement.addEventListener("keypress", keyboardEvent => {
-      console.log(keyboardEvent.key);
+    webElement.addEventListener("keypress", keyEvent => {
+      console.log(keyEvent.key);
 
-      if (!this.isNumber(keyboardEvent.key)) {
-        keyboardEvent.preventDefault();
+      if ((keyEvent.key >= 0 && keyEvent.key <= 9) || keyEvent.code === 0) {
+        keyEvent.preventDefault();
       }
     });
   }
@@ -47,34 +46,26 @@ export default class MaskNumberView {
 
   appendElement(parentNode, mask, elementPos) {
     let char = mask[elementPos];
-    let webElement;
+    let webElement = document.createElement("div");
 
-    if (char === "I") {
-      webElement = document.createElement("input");
-
-      webElement.className = "number-block__input";
-      webElement.maxLength = 1;
+    if (this.isNumber(char)) {
+      webElement.textContent = char;
+      webElement.className = "number-block__number";
       this.setMarginRightForSpecialChar(webElement, mask, elementPos);
+    } else if (char === "*") {
+      webElement.textContent = "●";
 
-      this.setOnlyNumbersValidator(webElement);
+      webElement.className = "number-block__number";
+      this.setMarginRightForSpecialChar(webElement, mask, elementPos);
+    } else if (char === "I") {
+      webElement.className = "number-block__input";
+      webElement.contentEditable = true;
+      this.setMarginRightForSpecialChar(webElement, mask, elementPos);
     } else {
-      webElement = document.createElement("div");
+      webElement.textContent = char;
 
-      if (this.isNumber(char)) {
-        webElement.textContent = char;
-        webElement.className = "number-block__number";
-        this.setMarginRightForSpecialChar(webElement, mask, elementPos);
-      } else if (char === "*") {
-        webElement.textContent = "●";
-
-        webElement.className = "number-block__number";
-        this.setMarginRightForSpecialChar(webElement, mask, elementPos);
-      } else {
-        webElement.textContent = char;
-
-        webElement.className = "number-block__non-number";
-        this.setMarginRightForNonSpecialChar(webElement, mask, elementPos);
-      }
+      webElement.className = "number-block__non-number";
+      this.setMarginRightForNonSpecialChar(webElement, mask, elementPos);
     }
 
     parentNode.appendChild(webElement);
@@ -83,9 +74,6 @@ export default class MaskNumberView {
   render(divId = "root") {
     let parentNode = document.createElement("div");
     parentNode.className = "number-block";
-    // this.appendElement(parentNode, "asd", 1);
-    // this.appendElement(parentNode, "asd", 1);
-    // this.appendElement(parentNode, "asd", 1);
     const mask = "+7(985)0II-**-**";
 
     for (var i = 0; i < mask.length; i++) {
@@ -93,9 +81,5 @@ export default class MaskNumberView {
     }
     let rootNode = document.getElementById(divId);
     rootNode.appendChild(parentNode);
-    // rootNode.innerHTML = `
-    //   <div class="number-block">
-    //     a
-    //   </div>`;
   }
 }

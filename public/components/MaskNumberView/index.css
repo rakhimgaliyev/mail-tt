@@ -9,6 +9,9 @@
 
   font-family: ArialMT;
   font-size: 15px;
+  line-height: 18px;
+
+  color: #333333;
 }
 
 .number-block__number {
@@ -44,9 +47,28 @@
   border-radius: 2px;
 }
 
+/* .number-block__input:not(:empty) {
+  border-bottom-width: 0px;
+}
+
+.number-block__input:empty {
+  border-bottom-width: 1px;
+} */
+
+.number-block__input:focus {
+  outline: none;
+}
+
 .number-block__input:hover {
   background: #ffffff;
   border: 1px solid rgba(0, 0, 0, 0.24);
+  box-sizing: border-box;
+  border-radius: 2px;
+}
+
+.number-block__input:focus {
+  background: #ffffff;
+  border: 1px solid rgba(0, 0, 0, 0.48);
   box-sizing: border-box;
   border-radius: 2px;
 }
