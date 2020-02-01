@@ -12,9 +12,12 @@ export default class MaskNumberView {
 
   setOnlyNumbersValidator(webElement) {
     webElement.addEventListener("keypress", keyEvent => {
-      console.log(keyEvent.key);
+      console.log(webElement.textContent.length);
 
-      if ((keyEvent.key >= 0 && keyEvent.key <= 9) || keyEvent.code === 0) {
+      if (
+        (!(keyEvent.key >= 0 && keyEvent.key <= 9) && keyEvent.code !== 0) ||
+        webElement.textContent.length >= 1
+      ) {
         keyEvent.preventDefault();
       }
     });
@@ -60,6 +63,9 @@ export default class MaskNumberView {
     } else if (char === "I") {
       webElement.className = "number-block__input";
       webElement.contentEditable = true;
+
+      this.setOnlyNumbersValidator(webElement);
+
       this.setMarginRightForSpecialChar(webElement, mask, elementPos);
     } else {
       webElement.textContent = char;

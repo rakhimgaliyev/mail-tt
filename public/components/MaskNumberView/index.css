@@ -47,13 +47,10 @@
   border-radius: 2px;
 }
 
-/* .number-block__input:not(:empty) {
-  border-bottom-width: 0px;
-}
-
 .number-block__input:empty {
-  border-bottom-width: 1px;
-} */
+  padding-left: 7px;
+  padding-top: 5px;
+}
 
 .number-block__input:focus {
   outline: none;
