@@ -36,27 +36,33 @@ export default class MaskNumberView {
   }
 
   appendElement(parentNode, mask, elementPos) {
-    let webElement = document.createElement("div");
-
     let char = mask[elementPos];
+    let webElement;
 
-    if (this.isNumber(char)) {
-      webElement.textContent = char;
-      webElement.className = "number-block__number";
-      this.setMarginRightForSpecialChar(webElement, mask, elementPos);
-    } else if (char === "*") {
-      webElement.textContent = "●";
+    if (char === "I") {
+      webElement = document.createElement("input");
 
-      webElement.className = "number-block__number";
-      this.setMarginRightForSpecialChar(webElement, mask, elementPos);
-    } else if (char === "I") {
-      webElement.className = "number-block__number";
+      webElement.className = "number-block__input";
+      webElement.maxLength = 1;
       this.setMarginRightForSpecialChar(webElement, mask, elementPos);
     } else {
-      webElement.textContent = char;
+      webElement = document.createElement("div");
 
-      webElement.className = "number-block__non-number";
-      this.setMarginRightForNonSpecialChar(webElement, mask, elementPos);
+      if (this.isNumber(char)) {
+        webElement.textContent = char;
+        webElement.className = "number-block__number";
+        this.setMarginRightForSpecialChar(webElement, mask, elementPos);
+      } else if (char === "*") {
+        webElement.textContent = "●";
+
+        webElement.className = "number-block__number";
+        this.setMarginRightForSpecialChar(webElement, mask, elementPos);
+      } else {
+        webElement.textContent = char;
+
+        webElement.className = "number-block__non-number";
+        this.setMarginRightForNonSpecialChar(webElement, mask, elementPos);
+      }
     }
 
     parentNode.appendChild(webElement);
