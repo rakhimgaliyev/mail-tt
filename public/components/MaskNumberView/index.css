@@ -1,0 +1,12 @@
+@font-face {
+  font-family: ArialMT;
+  src: url(fonts/arialmt.ttf) format("truetype"),
+    url(fonts/arialmt.woff) format("woff");
+}
+
+.number-block {
+  display: flex;
+
+  font-family: ArialMT;
+  font-size: 35px;
+}
