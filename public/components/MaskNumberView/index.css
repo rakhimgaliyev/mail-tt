@@ -8,5 +8,23 @@
   display: flex;
 
   font-family: ArialMT;
-  font-size: 35px;
+  font-size: 15px;
+}
+
+.number-block__number {
+  display: flex;
+  height: 32px;
+  width: 25px;
+
+  justify-content: center;
+  align-items: center;
+
+  background: #f0f0f0;
+  border-radius: 2px;
+}
+
+.number-block__non-number {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
