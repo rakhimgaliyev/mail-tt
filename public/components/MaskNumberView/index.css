@@ -69,3 +69,16 @@
   box-sizing: border-box;
   border-radius: 2px;
 }
+
+.number-block__input::after {
+  content: "";
+  width: 9px;
+
+  border-bottom: 1px solid #999999;
+  margin-top: 4px;
+  margin-right: 6px;
+}
+
+.number-block__input.hidden::after {
+  content: none;
+}

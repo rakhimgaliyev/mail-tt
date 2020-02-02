@@ -12,6 +12,8 @@ export default class MaskNumberView {
 
   setOnlyNumbersValidator(webElement) {
     webElement.addEventListener("keypress", keyEvent => {
+      console.log(keyEvent);
+      console.log(keyEvent.code);
       console.log(webElement.textContent.length);
 
       if (
@@ -19,6 +21,8 @@ export default class MaskNumberView {
         webElement.textContent.length >= 1
       ) {
         keyEvent.preventDefault();
+      } else {
+        webElement.classList.add("hidden");
       }
     });
   }
