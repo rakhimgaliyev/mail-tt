@@ -81,6 +81,21 @@ export default class MaskNumberView {
     parentNode.appendChild(webElement);
   }
 
+  setErrorMode() {
+    let inputElements = document.getElementsByClassName("number-block__input");
+    for (let i = 0; i < inputElements.length; i++) {
+      inputElements[i].classList.add("number-block__input-error");
+    }
+
+    let errorMessage = document.createElement("div");
+    errorMessage.className = "number-block__input__error-text";
+    errorMessage.innerText = "Неверный номер, попробуйте еще раз";
+
+    document
+      .getElementsByClassName("number-block")[0]
+      .appendChild(errorMessage);
+  }
+
   render(divId = "root") {
     let parentNode = document.createElement("div");
     parentNode.className = "number-block";

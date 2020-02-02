@@ -6,6 +6,7 @@
 
 .number-block {
   display: flex;
+  flex-wrap: wrap;
 
   font-family: ArialMT;
   font-size: 15px;
@@ -81,4 +82,23 @@
 
 .number-block__input.hidden::after {
   content: none;
+}
+
+.number-block__input-error {
+  background: #ffffff;
+  border: 1px solid #ff1100;
+  box-sizing: border-box;
+  border-radius: 2px;
+}
+
+.number-block__input__error-text {
+  margin-top: 4px;
+
+  flex-basis: 100%;
+
+  font-family: ArialMT;
+  font-size: 13px;
+  line-height: 20px;
+
+  color: #ff1100;
 }
